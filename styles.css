@@ -1,0 +1,12 @@
+#displayCanvas {
+	margin: 150px auto;
+	display: block;
+	-webkit-transform: rotateY(180deg);
+}
+
+#title {
+	font-size: 63px;
+	font-family: sans-serif;
+	color: #091A00;
+	text-align: center;
+}
