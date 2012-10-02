@@ -45,7 +45,7 @@ navigator.getUserMedia({video: true}, function (stream) {
 	videoElement.src = window.URL.createObjectURL(stream);
 
 	// Wait for the video element to initialize
-	setTimeout(function() {
+	videoElement.addEventListener("canplay", function() {
 		// Now that the video element has been initialized, determine the webcam resolution from it
 		var horizontalResolution = videoElement.videoWidth;
 		var verticalResolution = videoElement.videoHeight;
@@ -134,7 +134,7 @@ navigator.getUserMedia({video: true}, function (stream) {
 			// Finally, draw the updated image data to the visible canvas
 			displayCanvasContext.putImageData(displayImageData, 0, 0, 0, 0, horizontalResolution, verticalResolution);
 		}
-	}, 2000);
+	});
 });
 
 // Converts a HSL color to a RGB one
