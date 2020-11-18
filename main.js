@@ -24,17 +24,18 @@ var canvas = document.getElementById('displayCanvas')
 var displayCanvasContext = canvas.getContext('2d')
 
 // Use vendor prefixed getUserMedia if needed
-navigator.getUserMedia =
-  navigator.getUserMedia || navigator.webkitGetUserMedia || undefined
+navigator.mediaDevices.getUserMedia =
+  navigator.mediaDevices.getUserMedia ||
+  navigator.webkitGetUserMedia ||
+  undefined
 if (navigator.getUserMedia === undefined) {
   if (console !== undefined) {
     console.log("Browser doesn't support getUserMedia")
-    return
   }
 }
 
 // Start the webcam
-navigator.getUserMedia({ video: true }, function (stream) {
+navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
   // Create a video element and set its source to the stream from the webcam
   var videoElement = document.createElement('video')
   videoElement.style.display = 'none'
@@ -43,7 +44,7 @@ navigator.getUserMedia({ video: true }, function (stream) {
   if (window.URL === undefined) {
     window.URL = window.webkitURL
   }
-  videoElement.src = window.URL.createObjectURL(stream)
+  videoElement.srcObject = stream
 
   // Wait for the video element to initialize
   videoElement.addEventListener('canplay', function () {
