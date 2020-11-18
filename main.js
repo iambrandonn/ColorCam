@@ -10,11 +10,13 @@ request.onload = function () {
   audioContext.decodeAudioData(request.response, function (buffer) {
     var source = audioContext.createBufferSource()
     source.buffer = buffer
+    var gain = context.createGain()
+    source.connect(gain)
     analyser = audioContext.createAnalyser()
     analyser.fftSize = 32
     source.connect(analyser)
     analyser.connect(audioContext.destination)
-    source.noteOn(0)
+    source.start(0)
   })
 }
 request.send()
