@@ -6,7 +6,7 @@ var request = new XMLHttpRequest()
 request.open('GET', 'ratherBeWitU2.mp3', true)
 request.responseType = 'arraybuffer'
 request.onload = function () {
-  var audioContext = new webkitAudioContext()
+  var audioContext = new AudioContext()
   audioContext.decodeAudioData(request.response, function (buffer) {
     var source = audioContext.createBufferSource()
     source.buffer = buffer
